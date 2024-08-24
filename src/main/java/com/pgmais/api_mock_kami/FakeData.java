@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import com.pgmais.api_mock_kami.Models.Agreements;
 import com.pgmais.api_mock_kami.Models.Debts;
 import com.pgmais.api_mock_kami.Models.Offers;
-import com.pgmais.api_mock_kami.Models.Offers.PaymentOption;
 import com.pgmais.api_mock_kami.Repository.AgreementsRepository;
 import com.pgmais.api_mock_kami.Repository.DebtsRepository;
 import com.pgmais.api_mock_kami.Repository.OffersRepository;
