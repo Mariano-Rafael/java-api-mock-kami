@@ -34,17 +34,3 @@ public class Offers {
         private LocalDate dueDate;
     }
 }
-
-
-    /* lista com as opções de pagamento
-    private ArrayList<PaymentOption> paymentOptions;
-    @Data
-    @NoArgsConstructor
-    public static class PaymentOption {
-    private String id;
-    private double value;
-    private int installmentsNumber;
-    private double installmentValue;
-    private LocalDate dueDate;
-    }*/
-
