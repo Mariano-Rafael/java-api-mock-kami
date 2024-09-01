@@ -9,12 +9,15 @@ import java.util.List;
 @Service
 public class OffersService {
     private final OffersRepository offersRepository;
-    
+
     public OffersService(OffersRepository offersRepository) {
         this.offersRepository = offersRepository;
     }
 
-    public List<Offers> getAllOffers() {
-        return offersRepository.findAll();
+    public List<Offers> getOffersByClientId(Integer clientId) {
+        if (clientId == null) {
+            throw new IllegalArgumentException("O parâmetro clientId é obrigatório");
+        }
+        return offersRepository.findByClientId(clientId);
     }
 }

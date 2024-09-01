@@ -14,6 +14,7 @@ public class Offers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int clientId;
     private String contract;
     private String product;
     private LocalDate dueDate;
@@ -27,8 +28,9 @@ public class Offers {
     @Data
     @NoArgsConstructor
     public static class PaymentOption {
-        private String id;
-        private double value;
+        private Long id;
+        private int clientId;
+        private double valueD;
         private int installmentsNumber;
         private double installmentValue;
         private LocalDate dueDate;

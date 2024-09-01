@@ -14,8 +14,11 @@ public class DebtsService {
         this.debtsRepository = debtsRepository;
     }
 
-    public List<Debts> getAllDebts() {
-        return debtsRepository.findAll();
+    public List<Debts> getDebtsByClientId(Integer clientId) {
+        if (clientId == null) {
+            throw new IllegalArgumentException("O parâmetro id é obrigatório");
+        }
+        return debtsRepository.findByClientId(clientId);
     }
 }
 

@@ -17,6 +17,7 @@ public class Agreements {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int clientId;
     private LocalDate dueDate;
     private String digitableLine;
 }

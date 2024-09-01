@@ -17,6 +17,7 @@ public class Debts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int clientId;
     private String contract;
     private double paymentValue;
     private double originalValue;
@@ -30,5 +31,4 @@ public class Debts {
     private int maximumInstallmentNumber;
     private LocalDate minimumInstallmentDueDate;
     private LocalDate maximumInstallmentDueDate;
-
 }

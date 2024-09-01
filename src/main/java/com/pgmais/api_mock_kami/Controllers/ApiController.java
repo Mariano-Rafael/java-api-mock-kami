@@ -1,13 +1,11 @@
 package com.pgmais.api_mock_kami.Controllers;
-import com.pgmais.api_mock_kami.Models.Agreements;
-import com.pgmais.api_mock_kami.Models.Debts;
-import com.pgmais.api_mock_kami.Models.Offers;
+import com.pgmais.api_mock_kami.Models.*;
 import com.pgmais.api_mock_kami.Services.AgreementsService;
 import com.pgmais.api_mock_kami.Services.DebtsService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.pgmais.api_mock_kami.Services.OffersService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
@@ -23,19 +21,36 @@ public class ApiController {
         this.agreementsService = agreementsService;
     }
 
-    @GetMapping("/debts")
-    public List<Debts> getDebts() {
-        return debtsService.getAllDebts();
+    @PostMapping("/debts")
+    public ResponseEntity<List<Debts>> getDebts(@RequestBody DebtsRequest request) {
+        Integer clientId = request.getClientId();
+        if (clientId == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        List<Debts> debts = debtsService.getDebtsByClientId(clientId);
+        return ResponseEntity.ok(debts);
     }
 
-    @GetMapping("/offers")
-    public List<Offers> getOffers() {
-        return offersService.getAllOffers();
+
+    @PostMapping("/offers")
+    public ResponseEntity<List<Offers>> getOffers(@RequestBody OffersRequest request) {
+        Integer clientId = request.getClientId();
+        if (clientId == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        List<Offers> offers = offersService.getOffersByClientId(clientId);
+        return ResponseEntity.ok(offers);
     }
 
-    @GetMapping("/agreements")
-    public List<Agreements> getAgreements() {
-        return agreementsService.getAllAgreements();
+
+    @PostMapping("/agreements")
+    public ResponseEntity<List<Agreements>> getAgreements(@RequestBody AgreementsRequest request) {
+        Integer clientId = request.getClientId();
+        if (clientId == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        List<Agreements> agreements = agreementsService.getAgreementsByClientId(clientId);
+        return ResponseEntity.ok(agreements);
 
     }
 }

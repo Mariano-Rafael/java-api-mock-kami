@@ -14,7 +14,10 @@ public class AgreementsService {
         this.agreementsRepository = agreementsRepository;
     }
 
-    public List<Agreements> getAllAgreements() {
-        return agreementsRepository.findAll();
+    public List<Agreements> getAgreementsByClientId(Integer clientId) {
+        if (clientId == null) {
+            throw new IllegalArgumentException("O parâmetro id é obrigatório");
+        }
+        return agreementsRepository.findByClientId(clientId);
     }
 }

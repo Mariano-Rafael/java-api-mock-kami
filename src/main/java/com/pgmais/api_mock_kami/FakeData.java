@@ -11,17 +11,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 @Component
 public class FakeData implements CommandLineRunner {
 
     private final DebtsRepository debtsRepository;
     private final AgreementsRepository agreementsRepository;
+    private final OffersRepository offersRepository;
 
-    public FakeData(DebtsRepository debtsRepository, OffersRepository offersRepository, AgreementsRepository agreementsRepository) {
+    public FakeData(DebtsRepository debtsRepository, OffersRepository offersRepository, AgreementsRepository agreementsRepository, OffersRepository offersRepository1) {
         this.debtsRepository = debtsRepository;
         this.agreementsRepository = agreementsRepository;
+        this.offersRepository = offersRepository1;
     }
 
     @Override
@@ -29,8 +30,9 @@ public class FakeData implements CommandLineRunner {
         Faker faker = new Faker();
 
         // gera registros fakes de debts, definido para 100 registros toda vez que iniciar a aplicação;
-        for (int i = 0; i<= 100; i++) {
+        for (int i = 0; i <= 100; i++) {
             Debts debts = new Debts();
+            debts.setClientId(i);
             debts.setContract(faker.number().digits(10));
             debts.setPaymentValue(faker.number().randomDouble(2, 100, 10000));
             debts.setPaymentValue(faker.number().randomDouble(2, 100, 10000));
@@ -53,19 +55,23 @@ public class FakeData implements CommandLineRunner {
         for (int i = 0; i<= 100; i++) {
             Offers offers = new Offers();
             offers.setContract(faker.number().digits(10));
+            offers.setClientId(i);
             offers.setProduct(faker.commerce().productName());
             offers.setDueDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 365)));
             offers.setInputLimitDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 60)));
 
+            offersRepository.save(offers);
         }
 
         // registros no agreements
-        for (int y = 0; y < 100; y++) {
+        for (int i = 0; i < 100; i++) {
             Agreements agreements = new Agreements();
+            agreements.setClientId(i);
             agreements.setDueDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 365)));
             agreements.setDigitableLine(faker.number().digits(47));
 
             agreementsRepository.save(agreements);
+        }
     }
-}}
+}
 
